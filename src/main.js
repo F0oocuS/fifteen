@@ -3,8 +3,8 @@ let startGameBtn = document.getElementById('start-game');
 let numbers = [ 
 					[1, 2, 3, 4], 
 					[5, 6, 7, 8], 
-					[9, 10, 11, 12], 
-					[13, 14, 15, null] 
+					[9, 10, 11, null], 
+					[13, 14, 15, 12] 
 				];
 
 document.addEventListener('keydown', (e) => {
@@ -31,6 +31,7 @@ document.addEventListener('keydown', (e) => {
 		onArrowRight();
 		updateCells();
 	}
+	checkIfWin();
 });
 
 startGameBtn.addEventListener('click', () => {
@@ -193,20 +194,17 @@ function takeArrayItem(index) {
 	return array[index];
 }
 
-function checkIfWin(array) {
+function checkIfWin() {
+	let neededArray = [
+						[1, 2, 3, 4],
+						[5, 6, 7, 8],
+						[9, 10, 11, 12],
+						[13, 14, 15, null]
+					]
 
-	let arr = array[0].concat(array[1], array[2], array[3]);
-	isWin = false;
-
-	for(let i = 0; i < arr.length - 2; i++) {
-		if(arr[i] < arr[i + 1]) {
-			isWin = true;
-		} else {
-			isWin = false;
-		}
-	}
-
-	if(isWin) {
-		alert('Congratulation!');
+	if(JSON.stringify(neededArray) === JSON.stringify(numbers)) {
+		setTimeout(() => {
+			alert('Congratulation! YOU will!')
+		}, 0); 
 	}
 }
